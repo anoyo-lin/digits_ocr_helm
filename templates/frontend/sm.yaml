@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "gene-test.fullname" . }}-frontend
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: Helm
+  endpoints:
+  - targetPort: "{{ .Values.frontend.service.port }}"
